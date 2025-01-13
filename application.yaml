@@ -6,7 +6,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.ibm.com/Adarsh-Tiwari/LearningArgoCD.git
+    repoURL: https://github.com/adarsh-tiwari17/test-argocd.git
     targetRevision: HEAD
     path: dev
   destination:

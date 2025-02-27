@@ -19,6 +19,7 @@ jobs:
           token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
           path: poc-swe-agent-quantum
           server-url: https://github.ibm.com 
+          git-config-url: https://github.ibm.com
       
       - name: Run POC script for desc
         id: run_analysis

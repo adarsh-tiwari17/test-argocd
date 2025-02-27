@@ -19,10 +19,9 @@ jobs:
       - name: Checkout Repo POC
         uses: actions/checkout@v3
         with:
-          repository: ibm-q-research/poc-swe-agent-quantum
+          repository: adarsh-tiwari17/pr-description-creator
           token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
           path: poc-swe-agent-quantum
-          server-url: https://github.ibm.com 
       
       - name: Run POC script for desc
         id: run_analysis

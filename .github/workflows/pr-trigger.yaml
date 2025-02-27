@@ -1,0 +1,38 @@
+name: Generate PR description
+
+on:
+  pull_request:
+    types: [opened]
+
+jobs:
+  pr-desc-creation:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Actual Repo
+        uses: actions/checkout@v3
+      
+      - name: Checkout Repo POC
+        uses: actions/checkout@v3
+        with:
+          repository: https://github.ibm.com/ibm-q-research/poc-swe-agent-quantum
+          token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}  # PAT with access to Repo B
+          path: poc-swe-agent-quantum
+      
+      - name: Run POC script for desc
+        id: run_analysis
+        run: |
+          cd poc-swe-agent-quantum
+          files=$(ls -1)
+          echo "Files in repoB:"
+          echo "$files"
+          echo "pr_description=${files}" >> $GITHUB_OUTPUT
+
+      - name: Update PR with Desc
+        uses: peter-evans/create-or-update-comment@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          issue-number: ${{ github.event.pull_request.number }}
+          body: |
+            **Automated Analysis:**
+            ${{ steps.run_analysis.outputs.pr_description }}

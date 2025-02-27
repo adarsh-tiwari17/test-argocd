@@ -28,7 +28,9 @@ jobs:
           files=$(ls -1)
           echo "Files in repoB:"
           echo "$files"
-          echo "pr_description=${files}" >> $GITHUB_OUTPUT
+          echo "pr_description<<EOF" >> $GITHUB_OUTPUT
+          echo "$files" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
 
       - name: Update PR with Desc
         uses: peter-evans/create-or-update-comment@v3
